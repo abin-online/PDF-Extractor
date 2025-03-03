@@ -8,9 +8,8 @@ export const uploadPdf = async (req: Request, res: Response): Promise<void> => {
       res.status(400).send("no file uploaded!");
       return;
     }
-    const filePath = `${process.env.BACKEND}/uploads/${
-      req.file.filename
-    }`;
+    const filePath = `${req.protocol}://${req.get("host")}/uploads/${req.file.filename}`;
+
     res.json({ filePath });
   } catch (error) {
     console.error("error while uploading pdf");
